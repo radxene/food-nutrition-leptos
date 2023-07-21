@@ -1,12 +1,18 @@
-mod services;
+mod providers;
+mod utils;
 mod view;
 
 use leptos::*;
 
-use services::theme::ThemeService;
-use view::widgets::application::Application;
+use providers::Providers;
+use utils::theme::ThemeUtil;
+use view::components::Application;
 
 fn main() {
-    ThemeService::init();
-    mount_to_body(|cx| view! { cx,  <Application /> })
+    ThemeUtil::init();
+
+    mount_to_body(|cx| {
+        Providers::init(cx);
+        view! { cx,  <Application /> }
+    })
 }

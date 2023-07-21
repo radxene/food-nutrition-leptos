@@ -1,30 +1,24 @@
-mod navigation_menu;
-mod navigation_menu_group;
-
 use leptos::*;
 
-use crate::services::theme::{ThemeMode, ThemeService};
-use crate::view::ui::aria::sr_only::SrOnly;
-use crate::view::ui::buttons::button_avatar::ButtonAvatar;
-use crate::view::ui::buttons::button_mode::ButtonMode;
-use crate::view::ui::icons::icon_maximize::IconMaximize;
-use crate::view::ui::icons::icon_minimize::IconMinimize;
-use crate::view::ui::icons::icon_moon::IconMoon;
-use crate::view::ui::icons::icon_sun::IconSun;
-
-use navigation_menu::NavigationMenu as Menu;
-use navigation_menu_group::NavigationMenuGroup as MenuGroup;
+use crate::utils::theme::{ThemeMode, ThemeUtil};
+use crate::view::ui::aria::SrOnly;
+use crate::view::ui::buttons::ButtonAvatar;
+use crate::view::ui::buttons::ButtonMode;
+use crate::view::ui::icons::IconMaximize;
+use crate::view::ui::icons::IconMinimize;
+use crate::view::ui::icons::IconMoon;
+use crate::view::ui::icons::IconSun;
 
 #[component]
 pub fn NavigationMenu(cx: Scope) -> impl IntoView {
-    let (dark, set_dark) = create_signal(cx, ThemeService::is_dark_mode());
+    let (dark, set_dark) = create_signal(cx, ThemeUtil::is_dark_mode());
     let (maximize, set_maximize) = create_signal(cx, false);
 
     let change_dark_mode = move |_ev| {
-        if dark() {
-            ThemeService::set_preferred_color_schema(ThemeMode::Light);
+        if dark.get() {
+            ThemeUtil::set_preferred_color_schema(ThemeMode::Light);
         } else {
-            ThemeService::set_preferred_color_schema(ThemeMode::Dark);
+            ThemeUtil::set_preferred_color_schema(ThemeMode::Dark);
         }
         set_dark.set(!dark.get());
         // log!("Change dark mode");
@@ -50,7 +44,7 @@ pub fn NavigationMenu(cx: Scope) -> impl IntoView {
         view! { cx,
             <>
                 <SrOnly>"Toggle dark mode"</SrOnly>
-                <Show when=move || { dark() } fallback=|cx| view! { cx, <IconMoon /> }>
+                <Show when=move || { dark.get() } fallback=|cx| view! { cx, <IconMoon /> }>
                     <IconSun />
                 </Show>
             </>
@@ -72,7 +66,7 @@ pub fn NavigationMenu(cx: Scope) -> impl IntoView {
 
                 <ButtonMode on:click=change_maximize_mode md_only=true>
                     <SrOnly>"Toggle screen mode"</SrOnly>
-                    <Show when=move || { maximize() } fallback=|cx| view! { cx, <IconMinimize /> }>
+                    <Show when=move || { maximize.get() } fallback=|cx| view! { cx, <IconMinimize /> }>
                         <IconMaximize />
                     </Show>
                 </ButtonMode>
@@ -80,5 +74,23 @@ pub fn NavigationMenu(cx: Scope) -> impl IntoView {
                 <ButtonAvatar src="/assets/img/avatar.png" />
             </MenuGroup>
         </Menu>
+    }
+}
+
+#[component]
+fn Menu(cx: Scope, children: Children) -> impl IntoView {
+    view! { cx,
+        <div class="flex items-center justify-between">
+            {children(cx)}
+        </div>
+    }
+}
+
+#[component]
+pub fn MenuGroup(cx: Scope, children: Children) -> impl IntoView {
+    view! { cx,
+        <div class="flex items-center gap-2">
+            {children(cx)}
+        </div>
     }
 }

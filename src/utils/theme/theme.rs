@@ -4,8 +4,8 @@ use wasm_bindgen::JsValue;
 use wasm_bindgen::{prelude::*, JsCast};
 use web_sys::{window, MediaQueryListEvent};
 
-use crate::services::media_query::MediaQueryService;
-use crate::services::storage::StorageService;
+use crate::utils::media_query::MediaQueryUtil;
+use crate::utils::storage::StorageUtil;
 
 const PREFERS_COLOR_SCHEME_DARK: &'static str = "(prefers-color-scheme: dark)";
 
@@ -17,28 +17,28 @@ pub enum ThemeMode {
     Light,
 }
 
-pub struct ThemeService {}
+pub struct ThemeUtil {}
 
-impl ThemeService {
+impl ThemeUtil {
     pub fn init() {
         Self::apply_document_theme_mode(Self::get_preferred_color_schema());
         Self::_watch_preferred();
     }
 
     pub fn is_dark_mode() -> bool {
-        ThemeService::get_preferred_color_schema() == ThemeMode::Dark
+        Self::get_preferred_color_schema() == ThemeMode::Dark
     }
 
     pub fn get_preferred_color_schema() -> ThemeMode {
         let mut theme: ThemeMode;
 
-        if MediaQueryService::get_media_query_list(PREFERS_COLOR_SCHEME_DARK).matches() {
+        if MediaQueryUtil::get_media_query_list(PREFERS_COLOR_SCHEME_DARK).matches() {
             theme = ThemeMode::Dark;
         } else {
             theme = ThemeMode::Light;
         }
 
-        if let Some(stored_theme) = StorageService::get_item("theme") {
+        if let Some(stored_theme) = StorageUtil::get_item("theme") {
             theme = ThemeMode::from_str(&stored_theme).unwrap();
         }
 
@@ -48,7 +48,7 @@ impl ThemeService {
     pub fn set_preferred_color_schema(theme_mode: ThemeMode) {
         let theme_mode_string = theme_mode.to_string();
         Self::apply_document_theme_mode(theme_mode);
-        StorageService::set_item("theme", &theme_mode_string);
+        StorageUtil::set_item("theme", &theme_mode_string);
     }
 
     pub fn apply_document_theme_mode(theme_mode: ThemeMode) {
@@ -72,15 +72,15 @@ impl ThemeService {
 
     fn _watch_preferred() {
         let cb = Closure::wrap(Box::new(|ev: MediaQueryListEvent| {
-            let mode = if StorageService::get_item("theme").is_none() && ev.matches() {
+            let mode = if StorageUtil::get_item("theme").is_none() && ev.matches() {
                 ThemeMode::Dark
             } else {
                 ThemeMode::Light
             };
-            StorageService::set_item("theme", &mode.to_string());
+            StorageUtil::set_item("theme", &mode.to_string());
         }) as Box<dyn FnMut(_)>);
 
-        MediaQueryService::watch_media_query_list(
+        MediaQueryUtil::watch_media_query_list(
             PREFERS_COLOR_SCHEME_DARK,
             "change",
             cb.as_ref().unchecked_ref(),

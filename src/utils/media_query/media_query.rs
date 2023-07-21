@@ -1,8 +1,8 @@
 use web_sys::{window, MediaQueryList};
 
-pub struct MediaQueryService {}
+pub struct MediaQueryUtil {}
 
-impl MediaQueryService {
+impl MediaQueryUtil {
     pub fn watch_media_query_list(query: &str, event_type: &str, listener: &::js_sys::Function) {
         Self::get_media_query_list(query)
             .add_event_listener_with_callback(event_type, listener)

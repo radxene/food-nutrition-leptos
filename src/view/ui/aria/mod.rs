@@ -1,1 +1,3 @@
-pub mod sr_only;
+mod sr_only;
+
+pub use sr_only::*;

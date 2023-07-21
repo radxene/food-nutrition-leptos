@@ -1,8 +1,8 @@
 use web_sys::{window, Storage};
 
-pub struct StorageService {}
+pub struct StorageUtil {}
 
-impl StorageService {
+impl StorageUtil {
     pub fn get_item(key: &str) -> Option<String> {
         Self::get_storage().get_item(key).unwrap()
     }
