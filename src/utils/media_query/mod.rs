@@ -1,3 +1,3 @@
-mod media_query;
+mod media_query_util;
 
-pub use media_query::*;
+pub use media_query_util::*;

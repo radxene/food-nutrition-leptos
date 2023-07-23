@@ -1,5 +1,5 @@
 use leptos::*;
-use leptos_icons::{AiIcon, BiIcon, Icon, SiIcon};
+use leptos_icons::{BsIcon, Icon, SiIcon};
 
 use super::particles::SidebarMenuNav;
 use super::particles::SidebarMenuNavItem;
@@ -12,17 +12,17 @@ pub fn SidebarMenu(cx: Scope) -> impl IntoView {
         <SidebarMenuTop />
 
         <SidebarMenuNav>
-            <SidebarMenuNavItem icon=Icon::from(AiIcon::AiDashboardOutlined)>
-                <SidebarMenuNavItemLink slot href="/">"Dashboard"</SidebarMenuNavItemLink>
+            <SidebarMenuNavItem icon=Icon::from(SiIcon::SiAlwaysdata)>
+                <SidebarMenuNavItemLink slot href="/">"Food Data"</SidebarMenuNavItemLink>
             </SidebarMenuNavItem>
 
-            <SidebarMenuNavItem icon=Icon::from(BiIcon::BiFileBlankRegular) label="Pages">
-                <SidebarMenuNavItemLink slot href="/page/blank">"Blank"</SidebarMenuNavItemLink>
-                <SidebarMenuNavItemLink slot href="/page/empty">"Empty"</SidebarMenuNavItemLink>
+            <SidebarMenuNavItem icon=Icon::from(BsIcon::BsClipboard2Data) label="Nested List">
+                <SidebarMenuNavItemLink slot href="/page/blank">"Blank Page"</SidebarMenuNavItemLink>
+                <SidebarMenuNavItemLink slot href="/page/empty">"Empty Page"</SidebarMenuNavItemLink>
             </SidebarMenuNavItem>
 
             <SidebarMenuNavItem icon=Icon::from(SiIcon::SiRust)>
-                <SidebarMenuNavItemLink slot href="https://rustwasm.github.io/" target="_blank">"WasmPack"</SidebarMenuNavItemLink>
+                <SidebarMenuNavItemLink slot href="https://leptos.dev/" target="_blank">"Leptos Rust"</SidebarMenuNavItemLink>
             </SidebarMenuNavItem>
         </SidebarMenuNav>
     }

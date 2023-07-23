@@ -8,7 +8,7 @@ use super::particles::Sidebar;
 #[component]
 pub fn MainLayout(cx: Scope, children: Children) -> impl IntoView {
     view! { cx,
-        <div class="h-full bg-gray-100 dark:bg-dark-bg">
+        <div class="min-h-full bg-gray-100 dark:bg-dark-bg">
             <Sidebar />
             <Content>
                 <Navigation />

@@ -54,7 +54,7 @@ pub fn SidebarMenuTop(cx: Scope) -> impl IntoView {
         <div class="flex items-center justify-between flex-shrink-0 px-3">
             <a aria-current="page" href="#/" class="router-link-active router-link-exact-active inline-flex items-center gap-2">
                 <SrOnly>"Food Nutrition"</SrOnly>
-                <span class="p-2 bg-transparent dark:bg-white rounded-full">
+                <span class="p-2 bg-transparent dark:bg-[#ECECEC] rounded-full">
                     <IconBrand size=8 />
                 </span>
             </a>

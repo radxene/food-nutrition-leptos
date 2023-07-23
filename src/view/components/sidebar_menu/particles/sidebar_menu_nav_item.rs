@@ -70,7 +70,7 @@ pub fn SidebarMenuNavItem(
                                             target=slt.target.clone()
                                             class=move || toggle_link_text_active_class(href == location.pathname.get())
                                         >
-                                            <span class="text-base font-medium">{child}</span>
+                                            <span class="text-base font-medium whitespace-nowrap">{child}</span>
                                         </a>
                                     </li>
                                 }
@@ -108,7 +108,7 @@ where
             {
                 move || toggle_minimized_content(
                     Fragment::from(view! {cx,
-                        <span class="text-base font-medium">{children(cx)}</span>
+                        <span class="text-base font-medium whitespace-nowrap">{children(cx)}</span>
                     }.into_view(cx))
                 )
             }
@@ -151,7 +151,7 @@ where
                     let toggle_minimized_content = toggle_minimized_content.clone();
                     move || toggle_minimized_content(
                         view! {cx,
-                            <span class="text-base font-medium">{label}</span>
+                            <span class="text-base font-medium whitespace-nowrap">{label}</span>
                             <span aria-hidden="true" class="relative block w-6 h-6 ml-auto">
                                 {
                                     let contains = contains_active.clone();
@@ -181,6 +181,7 @@ where
 fn toggle_link_active_class(is_active: bool) -> String {
     let mut classes = vec![
         "flex",
+        "flex-nowrap",
         "items-center",
         "p-3",
         "gap-2",
@@ -223,6 +224,7 @@ fn toggle_link_text_active_class(is_active: bool) -> String {
 fn toggle_button_active_class(is_active: bool) -> String {
     let mut classes = vec![
         "flex",
+        "flex-nowrap",
         "items-center",
         "w-full",
         "p-3",
