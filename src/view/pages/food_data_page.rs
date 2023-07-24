@@ -24,6 +24,7 @@ pub fn FoodDataPage(cx: Scope) -> impl IntoView {
         <PageHeader>
             <PageTitle>"Food Data Page"</PageTitle>
         </PageHeader>
+
         <PageContent>
             <div class="grid gap-6">
                 <section class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-12">
