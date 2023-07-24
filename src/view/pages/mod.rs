@@ -1,3 +1,4 @@
+mod data;
 mod blank_page;
 mod empty_page;
 mod food_data_page;
