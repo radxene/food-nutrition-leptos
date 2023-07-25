@@ -2,8 +2,8 @@ use leptos::*;
 
 use crate::utils::theme::{ThemeMode, ThemeUtil};
 use crate::view::ui::aria::SrOnly;
-use crate::view::ui::buttons::ButtonAvatar;
 use crate::view::ui::buttons::ButtonMode;
+use crate::view::ui::buttons::ButtonProfile;
 use crate::view::ui::icons::IconMaximize;
 use crate::view::ui::icons::IconMinimize;
 use crate::view::ui::icons::IconMoon;
@@ -21,7 +21,6 @@ pub fn NavigationMenu(cx: Scope) -> impl IntoView {
             ThemeUtil::set_preferred_color_schema(ThemeMode::Dark);
         }
         set_dark.set(!dark.get());
-        // log!("Change dark mode");
     };
 
     let change_maximize_mode = move |_ev| {
@@ -37,7 +36,6 @@ pub fn NavigationMenu(cx: Scope) -> impl IntoView {
             document.exit_fullscreen();
         }
         set_maximize.set(!maximize.get());
-        // log!("Change maximize mode");
     };
 
     let render_dark_mode_icon = move || {
@@ -71,7 +69,7 @@ pub fn NavigationMenu(cx: Scope) -> impl IntoView {
                     </Show>
                 </ButtonMode>
 
-                <ButtonAvatar src="/assets/img/avatar.png" />
+                <ButtonProfile src="/assets/img/avatar.png" />
             </MenuGroup>
         </Menu>
     }

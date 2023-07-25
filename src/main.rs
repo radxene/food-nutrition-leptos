@@ -14,6 +14,7 @@ fn main() {
 
     mount_to_body(|cx| {
         Providers::init(cx);
+
         view! { cx,  <Application /> }
     })
 }

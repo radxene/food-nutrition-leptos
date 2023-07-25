@@ -15,7 +15,7 @@ pub fn SidebarMenu(cx: Scope) -> impl IntoView {
 
         <SidebarMenuNav>
             <SidebarMenuNavItem icon=Icon::from(SiIcon::SiAlwaysdata)>
-                <SidebarMenuNavItemLink slot href=PageRoute::Home.path()>"Food Data"</SidebarMenuNavItemLink>
+                <SidebarMenuNavItemLink slot href=PageRoute::Root.path()>"Food Data"</SidebarMenuNavItemLink>
             </SidebarMenuNavItem>
 
             <SidebarMenuNavItem icon=Icon::from(BsIcon::BsClipboard2Data) label="Nested List">
