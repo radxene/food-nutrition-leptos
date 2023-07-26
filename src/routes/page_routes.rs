@@ -1,11 +1,12 @@
 use leptos::*;
 use leptos_router::*;
 
+use crate::utils::validators::AuthValidatorUtil;
 use crate::view::layouts::main_layout::MainLayout;
 use crate::view::pages::{AuthLoginPage, AuthLogoutPage, BlankPage, EmptyPage, FoodDataPage};
 
 #[derive(Debug, Clone, Copy, Default)]
-pub enum PageRoute {
+pub enum AppRoute {
     #[default]
     Root,
     BlankPage,
@@ -14,7 +15,7 @@ pub enum PageRoute {
     AuthLogoutPage,
 }
 
-impl PageRoute {
+impl AppRoute {
     pub fn path(&self) -> &'static str {
         match self {
             Self::Root => "/",
@@ -29,22 +30,27 @@ impl PageRoute {
 #[component(transparent)]
 pub fn MainRoutes(cx: Scope) -> impl IntoView {
     view! { cx,
-        <Route path=PageRoute::Root.path() view=move |cx| {
-            view! { cx, <MainLayout><Outlet/></MainLayout> }
-        }>
-            <Route path=PageRoute::Root.path() view=FoodDataPage />
-            <Route path=PageRoute::BlankPage.path() view=move |cx| view! { cx,  <BlankPage /> } />
-            <Route path=PageRoute::EmptyPage.path() view=move |cx| view! { cx,  <EmptyPage /> } />
-        </Route>
+        <ProtectedRoute
+            path=AppRoute::Root.path()
+            redirect_path=AppRoute::AuthLoginPage.path()
+            condition=move |_| AuthValidatorUtil::validate_storage_user_locally()
+            view=move |cx| {
+                view! { cx, <MainLayout><Outlet/></MainLayout> }
+            }
+        >
+            <Route path=AppRoute::Root.path() view=FoodDataPage />
+            <Route path=AppRoute::BlankPage.path() view=move |cx| view! { cx, <BlankPage /> } />
+            <Route path=AppRoute::EmptyPage.path() view=move |cx| view! { cx, <EmptyPage /> } />
+        </ProtectedRoute>
     }
 }
 
 #[component(transparent)]
 pub fn AuthRoutes(cx: Scope) -> impl IntoView {
     view! { cx,
-        <Route path=PageRoute::Root.path() view=move |cx| { view! { cx, <Outlet/> } }>
-            <Route path=PageRoute::AuthLogoutPage.path() view=AuthLogoutPage />
-            <Route path=PageRoute::AuthLoginPage.path() view=AuthLoginPage />
+        <Route path=AppRoute::Root.path() view=move |cx| { view! { cx, <Outlet/> } }>
+            <Route path=AppRoute::AuthLogoutPage.path() view=AuthLogoutPage />
+            <Route path=AppRoute::AuthLoginPage.path() view=AuthLoginPage />
         </Route>
     }
 }

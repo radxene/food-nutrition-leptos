@@ -5,7 +5,7 @@ use wasm_bindgen::{prelude::*, JsCast};
 use web_sys::{window, MediaQueryListEvent};
 
 use crate::utils::media_query::MediaQueryUtil;
-use crate::utils::storage::StorageUtil;
+use crate::utils::storage::{StorageKeys, StorageUtil};
 
 const PREFERS_COLOR_SCHEME_DARK: &'static str = "(prefers-color-scheme: dark)";
 
@@ -38,7 +38,7 @@ impl ThemeUtil {
             theme = ThemeMode::Light;
         }
 
-        if let Some(stored_theme) = StorageUtil::get_item("theme") {
+        if let Some(stored_theme) = StorageUtil::get_item(&StorageKeys::Theme.to_string()) {
             theme = ThemeMode::from_str(&stored_theme).unwrap();
         }
 
@@ -48,7 +48,7 @@ impl ThemeUtil {
     pub fn set_preferred_color_schema(theme_mode: ThemeMode) {
         let theme_mode_string = theme_mode.to_string();
         Self::apply_document_theme_mode(theme_mode);
-        StorageUtil::set_item("theme", &theme_mode_string);
+        StorageUtil::set_item(&StorageKeys::Theme.to_string(), &theme_mode_string);
     }
 
     pub fn apply_document_theme_mode(theme_mode: ThemeMode) {
@@ -72,12 +72,14 @@ impl ThemeUtil {
 
     fn _watch_preferred() {
         let cb = Closure::wrap(Box::new(|ev: MediaQueryListEvent| {
-            let mode = if StorageUtil::get_item("theme").is_none() && ev.matches() {
+            let mode = if StorageUtil::get_item(&StorageKeys::Theme.to_string()).is_none()
+                && ev.matches()
+            {
                 ThemeMode::Dark
             } else {
                 ThemeMode::Light
             };
-            StorageUtil::set_item("theme", &mode.to_string());
+            StorageUtil::set_item(&StorageKeys::Theme.to_string(), &mode.to_string());
         }) as Box<dyn FnMut(_)>);
 
         MediaQueryUtil::watch_media_query_list(

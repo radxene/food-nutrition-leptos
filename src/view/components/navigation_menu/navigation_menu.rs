@@ -52,17 +52,18 @@ pub fn NavigationMenu(cx: Scope) -> impl IntoView {
     view! { cx,
         <Menu>
             <MenuGroup>
-                <ButtonMode on:click=change_dark_mode md_hidden=true>
-                    {render_dark_mode_icon}
-                </ButtonMode>
+                // <ButtonMode on:click=change_dark_mode md_hidden=true>
+                //     {render_dark_mode_icon}
+                // </ButtonMode>
+                <span />
             </MenuGroup>
 
             <MenuGroup>
-                <ButtonMode on:click=change_dark_mode md_only=true>
+                <ButtonMode on:click=change_dark_mode /* md_only=true */>
                     {render_dark_mode_icon}
                 </ButtonMode>
 
-                <ButtonMode on:click=change_maximize_mode md_only=true>
+                <ButtonMode on:click=change_maximize_mode /* md_only=true */>
                     <SrOnly>"Toggle screen mode"</SrOnly>
                     <Show when=move || { maximize.get() } fallback=|cx| view! { cx, <IconMinimize /> }>
                         <IconMaximize />

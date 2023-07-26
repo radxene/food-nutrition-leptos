@@ -2,6 +2,8 @@ use leptos::*;
 
 #[derive(Copy, Clone, PartialEq, Default, strum_macros::Display, strum_macros::EnumString)]
 pub enum SidebarWidthEnum {
+    #[strum(serialize = "w-0")]
+    Collapsed,
     #[strum(serialize = "w-20")]
     Minimized,
     #[strum(serialize = "w-64")]

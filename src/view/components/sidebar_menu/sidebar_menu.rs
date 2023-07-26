@@ -1,7 +1,7 @@
 use leptos::*;
 use leptos_icons::{BsIcon, Icon, SiIcon};
 
-use crate::routes::PageRoute;
+use crate::routes::AppRoute;
 
 use super::particles::SidebarMenuNav;
 use super::particles::SidebarMenuNavItem;
@@ -15,12 +15,12 @@ pub fn SidebarMenu(cx: Scope) -> impl IntoView {
 
         <SidebarMenuNav>
             <SidebarMenuNavItem icon=Icon::from(SiIcon::SiAlwaysdata)>
-                <SidebarMenuNavItemLink slot href=PageRoute::Root.path()>"Food Data"</SidebarMenuNavItemLink>
+                <SidebarMenuNavItemLink slot href=AppRoute::Root.path()>"Food Data"</SidebarMenuNavItemLink>
             </SidebarMenuNavItem>
 
             <SidebarMenuNavItem icon=Icon::from(BsIcon::BsClipboard2Data) label="Nested List">
-                <SidebarMenuNavItemLink slot href=PageRoute::BlankPage.path()>"Blank Page"</SidebarMenuNavItemLink>
-                <SidebarMenuNavItemLink slot href=PageRoute::EmptyPage.path()>"Empty Page"</SidebarMenuNavItemLink>
+                <SidebarMenuNavItemLink slot href=AppRoute::BlankPage.path()>"Blank Page"</SidebarMenuNavItemLink>
+                <SidebarMenuNavItemLink slot href=AppRoute::EmptyPage.path()>"Empty Page"</SidebarMenuNavItemLink>
             </SidebarMenuNavItem>
 
             <SidebarMenuNavItem icon=Icon::from(SiIcon::SiRust)>

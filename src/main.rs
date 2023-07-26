@@ -1,3 +1,4 @@
+mod models;
 mod providers;
 mod routes;
 mod utils;

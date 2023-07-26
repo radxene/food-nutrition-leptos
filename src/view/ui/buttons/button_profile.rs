@@ -2,7 +2,7 @@ use std::time::Duration;
 
 use leptos::{html::Div, *};
 
-use crate::routes::PageRoute;
+use crate::routes::AppRoute;
 
 #[component]
 pub fn ButtonProfile(
@@ -48,7 +48,7 @@ pub fn ButtonProfile(
                                     <div class="rounded-md ring-1 ring-black dark:ring-gray-700 ring-opacity-5 py-1 bg-white dark:bg-dark-vague-1" role="none">
                                         <a
                                             class="router-link-active router-link-exact-active block w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 transition duration-150 ease-in-out focus:outline-none dark:focus:text-white dark:focus:bg-dark-vague-3 dark:text-gray-400"
-                                            href=PageRoute::AuthLogoutPage.path()
+                                            href=AppRoute::AuthLogoutPage.path()
                                             role="menuitem"
                                             tabindex="-1"
                                             on:click=toggle_menu(false)

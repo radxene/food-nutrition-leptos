@@ -1,0 +1,14 @@
+[config]
+skip_core_tasks = true
+
+[tasks.trunk-build]
+command = "trunk"
+args = ["build"]
+
+[tasks.make-public]
+script = [
+  # "cp -R dist/ public/",
+]
+
+[tasks.build]
+run_task = { name = ["trunk-build", "make-public"], parallel = false }
