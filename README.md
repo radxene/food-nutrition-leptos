@@ -12,3 +12,5 @@ cargo install --locked wasm-bindgen-cli
 # After that you can run the project locally
 trunk serve
 ```
+
+![Screen Shot](https://github.com/radxene/food-nutrition-leptos/blob/main/screen_shot.png)

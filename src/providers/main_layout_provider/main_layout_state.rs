@@ -15,6 +15,7 @@ pub enum SidebarWidthEnum {
 pub struct MainLayoutState {
     pub is_leaved: bool,
     pub is_minimized: bool,
+    pub is_collapsed: bool,
     pub sidebar_width: SidebarWidthEnum,
 }
 
@@ -24,6 +25,15 @@ pub fn is_minimized_sidebar_slice(cx: Scope) -> (Signal<bool>, SignalSetter<bool
         expect_context::<RwSignal<MainLayoutState>>(cx),
         |state| state.is_minimized,
         |state, new_value| state.is_minimized = new_value,
+    )
+}
+
+pub fn is_collapsed_sidebar_slice(cx: Scope) -> (Signal<bool>, SignalSetter<bool>) {
+    create_slice(
+        cx,
+        expect_context::<RwSignal<MainLayoutState>>(cx),
+        |state| state.is_collapsed,
+        |state, new_value| state.is_collapsed = new_value,
     )
 }
 

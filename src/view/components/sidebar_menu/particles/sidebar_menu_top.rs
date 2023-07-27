@@ -4,7 +4,8 @@ use leptos::*;
 use wasm_bindgen::JsValue;
 
 use crate::providers::main_layout_provider::{
-    is_leaved_sidebar_slice, is_minimized_sidebar_slice, sidebar_width_slice, SidebarWidthEnum,
+    is_collapsed_sidebar_slice, is_leaved_sidebar_slice, is_minimized_sidebar_slice,
+    sidebar_width_slice, SidebarWidthEnum,
 };
 use crate::view::ui::aria::SrOnly;
 use crate::view::ui::icons::IconBrand;
@@ -19,6 +20,7 @@ pub fn SidebarMenuTop(cx: Scope) -> impl IntoView {
     let (is_minimized, set_is_minimized) = is_minimized_sidebar_slice(cx);
     let (is_leaved, _) = is_leaved_sidebar_slice(cx);
     let (_, set_sidebar_width) = sidebar_width_slice(cx);
+    let (_, set_is_collapsed) = is_collapsed_sidebar_slice(cx);
 
     let toggle_sidebar_width = move |_| {
         let sidebar_width = if is_minimized() {
@@ -81,7 +83,10 @@ pub fn SidebarMenuTop(cx: Scope) -> impl IntoView {
                     </span>
                 </Show>
                 <span class="lg:hidden w-6 h-6">
-                    <IconClose />
+                    <IconClose on:click=move |_| {
+                        set_is_collapsed(true);
+                        set_sidebar_width(SidebarWidthEnum::Collapsed);
+                    } />
                 </span>
             </button>
         </div>
