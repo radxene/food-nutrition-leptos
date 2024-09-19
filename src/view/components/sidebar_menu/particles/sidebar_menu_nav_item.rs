@@ -38,8 +38,8 @@ pub fn SidebarMenuNavItem(
             view! {cx,
                 <ItemLink
                     icon=icon
-                    href=link_slot.href.clone()
-                    target=link_slot.target.clone()
+                    href=link_slot.href
+                    target=link_slot.target
                     toggle_minimized_content=toggle_minimized_content
                 >
                     {(sidebar_menu_nav_item_link.first().unwrap().children)(cx)}
@@ -61,13 +61,13 @@ pub fn SidebarMenuNavItem(
                 >
                     {
                         sidebar_menu_nav_item_link.iter().map(|slt| {
-                            let href = slt.href.clone();
+                            let href = slt.href;
                             (slt.children)(cx).nodes.iter().map(|child| {
                                 view! {cx,
                                     <li class="relative leading-8 m-0 pl-6 before:block before:w-4 before:h-0 before:absolute before:left-0 before:top-4 before:border-t-2 before:border-t-gray-200 before:-mt-0.5 last:before:bg-white last:before:h-auto last:before:top-4 last:before:bottom-0 dark:last:before:bg-dark-vague-1 dark:before:border-t-gray-600">
                                         <a
                                             href=href
-                                            target=slt.target.clone()
+                                            target=slt.target
                                             class=move || toggle_link_text_active_class(href == location.pathname.get())
                                         >
                                             <span class="text-base font-medium whitespace-nowrap">{child}</span>

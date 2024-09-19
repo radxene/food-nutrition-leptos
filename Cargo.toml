@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 js-sys = "0.3.64"
 leptos = { version = "0.4.2", default-features = false, features = ["csr", "nightly"] }
-leptos_icons = { version = "0.0.15", git = "https://github.com/Carlosted/leptos-icons", default-features = false, features = ["AiDashboardOutlined", "SiAlwaysdata", "BsClipboard2Data", "SiRust"] }
+leptos_icons = { version = "0.0.15", default-features = false, features = ["AiDashboardOutlined", "SiAlwaysdata", "BsClipboard2Data", "SiRust"] }
 leptos_router = { version = "0.4.2", default-features = false, features = ["csr", "nightly"] }
 serde = { version = "1.0.167", features = ["derive"] }
 serde_json = "1.0.100"
